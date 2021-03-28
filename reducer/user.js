@@ -62,7 +62,16 @@ const user = (state = initialState, action) => {
         loading: false,
         date: date,
       };
+
+      //If Response have some error for eg 40X or 50X
+
+      // return {
+      //   ...state,
+      //   error: response.error_message,
+      //   loading: false,
+      // };
     }
+
     case 'REGISTER_NEW_USER': {
       //API Call and get a response
     }
