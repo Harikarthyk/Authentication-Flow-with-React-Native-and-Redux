@@ -11,9 +11,9 @@ const initialState = {
 const user = (state = initialState, action) => {
   switch (action.type) {
     case 'LOADING': {
+      // console.log('Loading ... ');
       return {...state, loading: true};
     }
-
     case 'LOAD_USER': {
       const getData = async () => {
         try {
@@ -34,14 +34,15 @@ const user = (state = initialState, action) => {
     }
     case 'LOGIN_NEW_USER': {
       //API Call and get a response
-
       //If Response is 200
+
+      // console.log('Login to new user');
       let user = {
         name: 'john',
         email: 'john@gmail.com',
       };
       let userToken = '#user_token';
-      let date = new Date().getDate;
+      let date = new Date().getDate();
 
       let userDetails = {user: user, userToken: userToken};
 
@@ -53,9 +54,7 @@ const user = (state = initialState, action) => {
           return state;
         }
       };
-
       storeData();
-
       return {
         ...state,
         user: user,
@@ -68,6 +67,7 @@ const user = (state = initialState, action) => {
       //API Call and get a response
     }
     case 'LOGOUT': {
+      // console.log('Logout Invoked .. 000');
       const storeData = async () => {
         try {
           const jsonValue = null;
@@ -76,9 +76,7 @@ const user = (state = initialState, action) => {
           return state;
         }
       };
-
       storeData();
-
       return {
         ...state,
         loading: false,
@@ -88,6 +86,8 @@ const user = (state = initialState, action) => {
         error: null,
       };
     }
+    default:
+      return state;
   }
 };
 

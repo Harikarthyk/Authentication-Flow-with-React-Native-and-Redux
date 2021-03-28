@@ -1,22 +1,28 @@
-const LOGIN_USER = 'LOGIN_USER';
+const LOGIN_USER = 'LOGIN_NEW_USER';
 const REGISTER_NEW_USER = 'REGISTER_NEW_USER';
 const LOGOUT = 'LOGOUT';
 const LOAD_USER = 'LOAD_USER';
 const LOADING = 'LOADING';
 
-const loading = () => {
+export const logout = () => {
+  return {
+    type: LOGOUT,
+  };
+};
+
+export const loading = () => {
   return {
     type: LOADING,
   };
 };
 
-const loadUser = () => {
+export const loadUser = () => {
   return {
     type: LOAD_USER,
   };
 };
 
-const loginUser = input => {
+export const loginUser = input => {
   return {
     type: LOGIN_USER,
     playload: {
@@ -25,17 +31,11 @@ const loginUser = input => {
   };
 };
 
-const registerNewUser = input => {
+export const registerNewUser = input => {
   return {
     type: REGISTER_NEW_USER,
     playload: {
       input,
     },
-  };
-};
-
-const logout = () => {
-  return {
-    type: LOGIN_USER,
   };
 };
