@@ -1,10 +1,9 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Linking} from 'react-native';
 import {connect} from 'react-redux';
 import {loading, loginUser} from '../action';
 
 function LoginPage({navigation, loading, loginUser}) {
-  //   const loginHandleListener = () => {};
   return (
     <View>
       <Text>Welcome to Login Page</Text>
@@ -12,7 +11,6 @@ function LoginPage({navigation, loading, loginUser}) {
         <TouchableOpacity
           onPress={() => {
             loading();
-            console.log('Loading');
             loginUser({
               name: 'John',
               email: 'john@gmail.com',

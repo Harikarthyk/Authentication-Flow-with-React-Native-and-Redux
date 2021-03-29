@@ -1,14 +1,45 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const initialState = {
-  user: null,
-  userToken: null,
-  date: null,
-  loading: false,
-  error: null,
+// const initialState = {
+//   user: null,
+//   userToken: null,
+//   date: null,
+//   loading: true,
+//   error: null,
+// };
+const initialState = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('@storage_Key');
+    if (jsonValue != null) {
+      let parse = JSON.parse(jsonValue);
+      // console.log('Initial State Function -> 16line in user.js => ', parse);
+      return {
+        user: parse.user,
+        userToken: parse.userToken,
+        date: new Date().getDate(),
+        loading: false,
+        error: null,
+      };
+    } else
+      return {
+        user: null,
+        userToken: null,
+        date: null,
+        loading: true,
+        error: null,
+      };
+  } catch (e) {
+    return {
+      user: null,
+      userToken: null,
+      date: null,
+      loading: true,
+      error: null,
+    };
+  }
 };
 
-const user = (state = initialState, action) => {
+const user = (state = initialState(), action) => {
   switch (action.type) {
     case 'LOADING': {
       // console.log('Loading ... ');
@@ -18,14 +49,19 @@ const user = (state = initialState, action) => {
       const getData = async () => {
         try {
           const jsonValue = await AsyncStorage.getItem('@storage_Key');
-          return jsonValue != null
-            ? {
-                ...state,
-                user: JSON.parse(jsonValue).user,
-                userToken: JSON.parse(jsonValue).userToken,
-                loading: false,
-              }
-            : state;
+          if (jsonValue != null) {
+            let parse = JSON.parse(jsonValue);
+            // console.log(
+            //   'Consoling the previous user -> 24line in user.js => ',
+            //   parse,
+            // );
+            return {
+              ...state,
+              user: parse.user,
+              userToken: parse.userToken,
+              loading: false,
+            };
+          } else return state;
         } catch (e) {
           return state;
         }
@@ -74,6 +110,11 @@ const user = (state = initialState, action) => {
 
     case 'REGISTER_NEW_USER': {
       //API Call and get a response
+
+      let apiCall = async () => {
+        console.log('Invoked Google Login');
+      };
+      apiCall();
     }
     case 'LOGOUT': {
       // console.log('Logout Invoked .. 000');
